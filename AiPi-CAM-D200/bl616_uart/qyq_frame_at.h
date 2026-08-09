@@ -24,7 +24,7 @@ typedef enum qyq_frame_at_states {
 
 typedef struct
 {
-    uint8_t *qyq_frame_at_name;                 // AT指令名字
+    const char *qyq_frame_at_name;              // AT指令名字
     uint8_t qyq_frame_at_len;                   // AT指令长度
     qyq_frame_at_event_t qyq_frame_at_test_cb;  // AT测试指令，用来显示AT指令参数的合法范围
     qyq_frame_at_event_t qyq_frame_at_query_cb; // AT查询指令，用来查询AT指令当前设置的属性
@@ -48,7 +48,7 @@ typedef struct
     uint8_t *qyq_frame_at_rx_buf;
     uint16_t qyq_frame_at_rx_size;
 
-    void (*qyq_frame_at_write)(uint8_t *buf, uint16_t len);
+    void (*qyq_frame_at_write)(const char *buf, uint16_t len);
 } qyq_frame_at_config_t;
 
 typedef struct qyq_frame_at_type {

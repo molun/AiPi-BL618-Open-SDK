@@ -44063,7 +44063,7 @@ static const unsigned char data__camera_html[] = {
 };
 
 void http_server_thread(void *msg);
-int get_http_command(char *http_msg, char *command);
+int get_http_command(const char *http_msg, char *command, size_t command_size);
 
 extern uint8_t *pic_addr;
 extern uint32_t pic_size;
@@ -44076,41 +44076,33 @@ u8 mysemaphoreflag = 0;
 extern at_os_mutex_t camera_muxsem_handle;
 
 #define PART_BOUNDARY "123456789000000000000987654321"
-static const char *_STREAM_CONTENT_TYPE = "multipart/x-mixed-replace;boundary=" PART_BOUNDARY;
 static const char *_STREAM_BOUNDARY = "24\r\n\r\n--" PART_BOUNDARY "\r\n\r\n";
 static const char *_STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %u\r\nX-Timestamp: %d.%06d\r\n\r\n\r\n";
 void stream_task_process(void *msg);
 static TaskHandle_t stream_task_hd;
-char TcpWriteBlock(int sc, char *buf, uint32_t len, uint32_t size);
+int TcpWriteBlock(int sc, const uint8_t *buf, uint32_t len, uint32_t block_size);
 
-int get_http_command(char *http_msg, char *command)
+int get_http_command(const char *http_msg, char *command, size_t command_size)
 {
-    char *p_end = http_msg;
-    char *p_start = http_msg;
-    while (*p_start) // GET /
-    {
-        if (*p_start == '/')
-        {
-            break;
-        }
-        p_start++;
-    }
+    const char *p_start = strchr(http_msg, '/');
     if (p_start == NULL)
     {
         return -1;
     }
 
-    p_end = strchr(http_msg, '\n');
-    while (p_end != p_start)
+    const char *p_end = strchr(p_start, ' ');
+    if (p_end == NULL)
     {
-        if (*p_end == ' ')
-        {
-            break;
-        }
-        p_end--;
+        return -1;
     }
-    int len = p_end - p_start;
-    strncpy(command, p_start, p_end - p_start);
+
+    size_t len = (size_t)(p_end - p_start);
+    if ((len == 0) || (len >= command_size))
+    {
+        return -1;
+    }
+    memcpy(command, p_start, len);
+    command[len] = '\0';
     return len;
 }
 
@@ -44121,9 +44113,6 @@ void mhttp_server_init()
     int ss, sc;
     struct sockaddr_in server_addr;
     struct sockaddr_in client_addr;
-    int snd_size = 0; /* 发送缓冲区大小 */
-    socklen_t optlen; /* 选项值长度 */
-    // int optlen;
     int err;
     socklen_t addrlen;
     // int addrlen;
@@ -44137,6 +44126,7 @@ void mhttp_server_init()
     if (ss < 0)
     {
         printf("socket error\n");
+        return;
     }
 
     // snd_size = 20*1024;    /* 发送缓冲区大小为8K */
@@ -44179,7 +44169,8 @@ void mhttp_server_init()
     if (err < 0)
     {
         printf("bind error\n");
-        return -1;
+        close(ss);
+        return;
     }
 
     /*设置侦听*/
@@ -44188,7 +44179,8 @@ void mhttp_server_init()
     if (err < 0)
     {
         printf("listen error\n");
-        return -1;
+        close(ss);
+        return;
     }
 
     addrlen = sizeof(struct sockaddr_in);
@@ -44219,7 +44211,6 @@ void mhttp_server_init()
 void http_server_thread(void *msg)
 {
     // printf("http_server_thread\r\n");
-    BaseType_t xReturn = pdTRUE; /* 定义一个创建信息返回值，默认为 pdPASS */
     MYPARM *parm11;
     parm11 = (MYPARM *)msg;
 
@@ -44239,17 +44230,23 @@ void http_server_thread(void *msg)
     while (1)
     {
         // printf("read stop\r\n");
-        size = read(sc, readbuffer, 1024);
+        size = read(sc, readbuffer, sizeof(readbuffer) - 1);
         // int rc = recv(sc, readbuffer, sizeof(readbuffer), 0);
-        printf("read len:%d\r\n", size);
-        printf("get:%s\r\n", readbuffer);
-
         if (size <= 0)
         {
             printf("size <= 0\r\n");
             break;
         }
-        int len = get_http_command(readbuffer, command); // 得到http 请求中 GET后面的字符串
+        readbuffer[size] = '\0';
+        printf("read len:%d\r\n", size);
+        printf("get:%s\r\n", readbuffer);
+        int len = get_http_command(readbuffer, command, sizeof(command)); // 得到http 请求中 GET后面的字符串
+        if (len < 0)
+        {
+            close(sc);
+            mysemaphoreflag--;
+            break;
+        }
         printf("get:%s len:%d\r\n", command, len);
 
         if (strcmp(command, "/") == 0)
@@ -44267,7 +44264,7 @@ void http_server_thread(void *msg)
                 printf("send failed");
                 close(sc);
                 mysemaphoreflag--;
-                return NULL;
+                return;
             }
             ret = write(sc, data__camera_html, sizeof(data__camera_html));
             if (ret < 0)
@@ -44291,7 +44288,7 @@ void http_server_thread(void *msg)
                 printf("send failed");
                 close(sc);
                 mysemaphoreflag--;
-                return NULL;
+                return;
             }
             static char data_buf[] = "{\"0xd3\":8,\"0x111\":0,\"0x132\":9,\"board\":\"AI-THINKER\",\"xclk\":10,\"pixformat\":3,\"framesize\":8,\"quality\":10,\"brightness\":0,\"contrast\":0,\"saturation\":0,\"sharpness\":0,\"special_effect\":0,\"wb_mode\":0,\"awb\":1,\"awb_gain\":1,\"aec\":1,\"aec2\":0,\"ae_level\":0,\"aec_value\":168,\"agc\":1,\"agc_gain\":0,\"gainceiling\":0,\"bpc\":0,\"wpc\":1,\"raw_gma\":1,\"lenc\":1,\"hmirror\":0,\"dcw\":1,\"colorbar\":0,\"led_intensity\":0,\"face_detect\":0,\"face_enroll\":0,\"face_recognize\":0}";
             // ret = write(sc, data_buf, 433);
@@ -44319,10 +44316,9 @@ void http_server_thread(void *msg)
                 printf("capture failed");
                 close(sc);
                 mysemaphoreflag--;
-                return NULL;
+                return;
             }
-            xReturn = xSemaphoreTake(camera_muxsem_handle, /* 互斥量句柄 */
-                                     portMAX_DELAY);       /* 等待时间 */
+            xSemaphoreTake(camera_muxsem_handle, portMAX_DELAY);
             ret = TcpWriteBlock(sc, pic_addr, pic_size, 8000);
             // len = datajpeg_len / 4;
 
@@ -44333,7 +44329,7 @@ void http_server_thread(void *msg)
                 mysemaphoreflag--;
                 printf("text write failed 3 1 %d", ret);
             }
-            xReturn = xSemaphoreGive(camera_muxsem_handle); // 给出互斥量
+            xSemaphoreGive(camera_muxsem_handle);
             close(sc);
             mysemaphoreflag--;
             // tls_gpio_write(WM_IO_PA_04, 0);
@@ -44351,7 +44347,7 @@ void http_server_thread(void *msg)
             //                    15000 * sizeof(u8),
             //                    59,
             //                    0);
-            xTaskCreate(stream_task_process, (char *)"stream_task", 1024 * 5, &sc, 16, &stream_task_hd);
+            xTaskCreate(stream_task_process, (char *)"stream_task", 1024 * 5, (void *)(intptr_t)sc, 16, &stream_task_hd);
             break;
         }
         else
@@ -44368,56 +44364,48 @@ void http_server_thread(void *msg)
     // 开中断
 }
 
-char TcpWriteBlock(int sc, char *buf, uint32_t len, uint32_t size)
+int TcpWriteBlock(int sc, const uint8_t *buf, uint32_t len, uint32_t block_size)
 {
-    int ret;
-    uint32_t dlen = len;
-    while (dlen > size)
+    uint32_t sent = 0;
+    while (sent < len)
     {
-        ret = write(sc, &buf[len - dlen], size);
-        if (ret < 0)
+        uint32_t remaining = len - sent;
+        uint32_t chunk = remaining < block_size ? remaining : block_size;
+        int ret = write(sc, &buf[sent], chunk);
+        if (ret <= 0)
         {
             return -1;
         }
-        dlen -= size;
-    }
-    ret = write(sc, &buf[len - dlen], dlen);
-    if (ret < 0)
-    {
-        return -1;
+        sent += (uint32_t)ret;
     }
     return 0;
 }
 
 void stream_task_process(void *msg)
 {
-    int *pcb = msg;
+    int sc = (int)(intptr_t)msg;
     char lenbuf[10];
     struct timeval tv;
-    u32 current_tick;
     char head_stream_buf[1000];
     char part_buf[1000];
-    u32 len = 0;
-    BaseType_t xReturn = pdTRUE; /* 定义一个创建信息返回值，默认为 pdPASS */
 
     printf("stream_task_process\r\n");
     sprintf(head_stream_buf, "HTTP/1.1 200 OK\r\nContent-Type: multipart/x-mixed-replace;boundary=123456789000000000000987654321\r\nTransfer-Encoding: chunked\r\nAccess-Control-Allow-Origin: *\r\nX-Framerate : 60\r\n\r\n");
-    int ret = write(*pcb, head_stream_buf, strlen(head_stream_buf));
+    int ret = write(sc, head_stream_buf, strlen(head_stream_buf));
     if (ret == -1)
     {
         printf("send failed");
-        close(*pcb);
+        close(sc);
         mysemaphoreflag--;
         vTaskDelete(NULL);
-        return NULL;
+        return;
     }
     vTaskDelay(10);
 
     while (1)
     {
         // printf("stream_task_process while\r\n");
-        xReturn = xSemaphoreTake(camera_muxsem_handle, /* 互斥量句柄 */
-                                 portMAX_DELAY);       /* 等待时间 */
+        xSemaphoreTake(camera_muxsem_handle, portMAX_DELAY);
         // current_tick = tls_os_get_time();
         // tv.tv_sec = (current_tick) / HZ;
         // tv.tv_usec = (1000000 / HZ) * (current_tick % HZ) + 100;
@@ -44427,94 +44415,102 @@ void stream_task_process(void *msg)
         tv.tv_sec = 105;
         tv.tv_usec = 2950;
 
-        ret = write(*pcb, _STREAM_BOUNDARY, strlen(_STREAM_BOUNDARY));
+        ret = write(sc, _STREAM_BOUNDARY, strlen(_STREAM_BOUNDARY));
         if (ret < 0)
         {
-            close(*pcb);
+            close(sc);
             mysemaphoreflag--;
             printf("text write failed 1 %d", ret);
-            xReturn = xSemaphoreGive(camera_muxsem_handle); // 给出互斥量
+            xSemaphoreGive(camera_muxsem_handle);
 
             vTaskDelete(NULL);
+            return;
         }
 
         
         if (pic_size < 10000)
         {
-            ret = write(*pcb, "4b\r\n", strlen("4b\r\n"));
+            ret = write(sc, "4b\r\n", strlen("4b\r\n"));
             if (ret < 0)
             {
-                close(*pcb);
+                close(sc);
                 mysemaphoreflag--;
                 printf("text write failed 1 %d", ret);
-                xReturn = xSemaphoreGive(camera_muxsem_handle); // 给出互斥量
+                xSemaphoreGive(camera_muxsem_handle);
                 vTaskDelete(NULL);
+                return;
             }
         }
         else if(pic_size < 100000)
         {
-            ret = write(*pcb, "4c\r\n", strlen("4c\r\n"));
+            ret = write(sc, "4c\r\n", strlen("4c\r\n"));
             if (ret < 0)
             {
-                close(*pcb);
+                close(sc);
                 mysemaphoreflag--;
                 printf("text write failed pic_size > 10000 %d", ret);
-                xReturn = xSemaphoreGive(camera_muxsem_handle); // 给出互斥量
+                xSemaphoreGive(camera_muxsem_handle);
                 vTaskDelete(NULL);
+                return;
             }
         }
         else
         {
-            ret = write(*pcb, "4d\r\n", strlen("4d\r\n"));
+            ret = write(sc, "4d\r\n", strlen("4d\r\n"));
             if (ret < 0)
             {
-                close(*pcb);
+                close(sc);
                 mysemaphoreflag--;
                 printf("text write failed pic_size > 10000 %d", ret);
-                xReturn = xSemaphoreGive(camera_muxsem_handle); // 给出互斥量
+                xSemaphoreGive(camera_muxsem_handle);
                 vTaskDelete(NULL);
+                return;
             }            
         }
 
         size_t hlen = snprintf((char *)part_buf, 128, _STREAM_PART, pic_size, tv.tv_sec, tv.tv_usec);
         // printf("hlen:%d\r\n",hlen);
-        ret = write(*pcb, (const char *)part_buf, hlen);
+        ret = write(sc, (const char *)part_buf, hlen);
 
         sprintf(lenbuf, "%x\r\n", pic_size);
-        ret = write(*pcb, lenbuf, strlen(lenbuf));
+        ret = write(sc, lenbuf, strlen(lenbuf));
 
         if (ret < 0)
         {
-            close(*pcb);
+            close(sc);
             mysemaphoreflag--;
             printf("text write failed 2 %d", ret);
-            xReturn = xSemaphoreGive(camera_muxsem_handle); // 给出互斥量
+            xSemaphoreGive(camera_muxsem_handle);
             vTaskDelete(NULL);
+            return;
         }
         vTaskDelay(10);
 
-        pic_addr[pic_size] = '\r';
-        pic_addr[pic_size + 1] = '\n';
-        pic_size = pic_size + 2;
-        ret = TcpWriteBlock(*pcb, pic_addr, pic_size, 5000);
+        ret = TcpWriteBlock(sc, pic_addr, pic_size, 5000);
+        if (ret == 0)
+        {
+            ret = write(sc, "\r\n", 2);
+        }
 
         if (ret < 0)
         {
-            close(*pcb);
+            close(sc);
             mysemaphoreflag--;
             printf("text write failed 3 1 %d", ret);
-            xReturn = xSemaphoreGive(camera_muxsem_handle); // 给出互斥量
+            xSemaphoreGive(camera_muxsem_handle);
             vTaskDelete(NULL);
+            return;
         }
 
         if (streatask == 0)
         {
             printf("text write failed 5 %d", ret);
-            xReturn = xSemaphoreGive(camera_muxsem_handle); // 给出互斥量
+            xSemaphoreGive(camera_muxsem_handle);
             vTaskDelete(NULL);
+            return;
         }
         }
-        xReturn = xSemaphoreGive(camera_muxsem_handle); // 给出互斥量
+        xSemaphoreGive(camera_muxsem_handle);
         vTaskDelay(50);
     }
 }

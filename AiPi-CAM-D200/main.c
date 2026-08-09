@@ -2,7 +2,6 @@
 #include "chip_include.h"
 #include "app_include.h"
 
-static TaskHandle_t bl618_freeheap_task_handle;
 static TaskHandle_t bl618_camera_task_handle;
 static TaskHandle_t bl618_wifi_task_handle;
 static TaskHandle_t bl618_button_task_handle;
@@ -14,40 +13,9 @@ uint16_t qyq_module_button_longtimer_value[1] = {200};                          
 struct bflb_device_s *gpio;
 
 volatile static uint8_t wifi_status = 0;
-volatile static uint8_t led_status = 0;
 extern uint8_t *pic_addr;
 extern uint32_t pic_size;
 extern uint8_t s_led_status;
-
-static int8_t qyq_module_tcpclient_write_block(int sockfd, const uint8_t *buf, uint32_t size, uint32_t blocksize)
-{
-    int total_sent = 0;
-    int bytes_sent;
-
-    if (sockfd < 0)
-    {
-        return -1;
-    }
-
-    // 分段发送消息
-    while (total_sent < size)
-    {
-        // 计算本次发送的字节数
-        int remaining = size - total_sent;
-        int to_send = remaining > blocksize ? blocksize : remaining;
-
-        // 发送消息片段
-        bytes_sent = send(sockfd, buf + total_sent, to_send, 0);
-        if (bytes_sent == -1)
-        {
-
-            return -1;
-        }
-
-        total_sent += bytes_sent;
-    }
-    return 0;
-}
 
 void bl618_wifi_init_process(void)
 {
@@ -62,14 +30,13 @@ void bl618_wifi_got_ip_process(void)
 
 void bl618_wifi_disconnect_process(void)
 {
-    printf("bl618_wifi_got_ip_process\r\n");
+    printf("bl618_wifi_disconnect_process\r\n");
     wifi_status = 0;
 }
 
 static void bl618_wifi_task(void *pvParameters)
 {
-    uint8_t data = 0;
-    int sock = 0;
+    (void)pvParameters;
     vTaskDelay(pdMS_TO_TICKS(3000));
     bl618_wifi_callback_register(bl618_wifi_got_ip_process, CODE_WIFI_ON_GOT_IP);
     bl618_wifi_callback_register(bl618_wifi_init_process, CODE_WIFI_ON_INIT_DONE);

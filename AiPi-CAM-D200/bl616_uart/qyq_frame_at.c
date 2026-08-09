@@ -41,8 +41,13 @@ static int8_t qyq_frame_at_parse_at(struct qyq_frame_at_type *qyq_frame_at, uint
     uint16_t offset = 0; // 基准
     char *ptr = null;    // 字符串指针
 
-    int argc = QYQ_FRAME_AT_ARGC_LIMIT;
+    int argc = 0;
     char *argv[QYQ_FRAME_AT_ARGC_LIMIT] = {(char *)0};
+
+    if (size < 2)
+    {
+        return -1;
+    }
 
     // 判断指令集是否以\r\n结尾
     if ((qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_buf[size - 2] != '\r') || (qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_buf[size - 1] != '\n'))
@@ -59,10 +64,10 @@ static int8_t qyq_frame_at_parse_at(struct qyq_frame_at_type *qyq_frame_at, uint
     // AT指令匹配
     for (index = 0; index < qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list_size; index++)
     {
-        ptr = strstr((const char *)qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_buf, (const char *)qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[index].qyq_frame_at_name);
+        ptr = strstr((const char *)qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_buf, qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[index].qyq_frame_at_name);
         if (ptr != null)
         {
-            ptr += strlen((const char *)qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[index].qyq_frame_at_name);
+            ptr += strlen(qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[index].qyq_frame_at_name);
             offset = ptr - (char *)qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_buf;
             break;
         }
@@ -100,7 +105,7 @@ static int8_t qyq_frame_at_parse_at(struct qyq_frame_at_type *qyq_frame_at, uint
     else if (ptr[0] == '=')
     { /* 解析设置命令 */
         ptr += 1;
-        argc = qyq_frame_at_string_split((char *)ptr, size - offset, ',', argv, argc);
+        argc = qyq_frame_at_string_split((char *)ptr, size - offset, ',', argv, QYQ_FRAME_AT_ARGC_LIMIT);
         if (null != qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[index].qyq_frame_at_setup_cb)
         {
             ret = qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[index].qyq_frame_at_setup_cb(argc, (const char **)argv);
@@ -129,7 +134,7 @@ static int8_t qyq_frame_at_init(struct qyq_frame_at_type *qyq_frame_at)
 
     for (i = 0; i < qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list_size; i++)
     {
-        if (qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_len != (int)strlen((const char *)qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_name))
+        if (qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_len != (int)strlen(qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_name))
         {
             return -1;
         }
@@ -142,7 +147,7 @@ static int8_t qyq_frame_at_init(struct qyq_frame_at_type *qyq_frame_at)
             }
 
             if (((qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[j].qyq_frame_at_len == qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_len) &&
-                 (strcmp((const char *)qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[j].qyq_frame_at_name, (const char *)qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_name) == 0)) ||
+                 (strcmp(qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[j].qyq_frame_at_name, qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_name) == 0)) ||
                 ((qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[j].qyq_frame_at_test_cb != NULL) && (qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[j].qyq_frame_at_test_cb == qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_test_cb)) ||
                 ((qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[j].qyq_frame_at_query_cb != NULL) && (qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[j].qyq_frame_at_query_cb == qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_query_cb)) ||
                 ((qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[j].qyq_frame_at_setup_cb != NULL) && (qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[j].qyq_frame_at_setup_cb == qyq_frame_at->qyq_frame_at_config->qyq_frame_at_list[i].qyq_frame_at_setup_cb)) ||
@@ -173,9 +178,9 @@ static int8_t qyq_frame_at_recv(struct qyq_frame_at_type *qyq_frame_at, uint8_t 
         return -1;
     }
 
-    qyq_frame_at->qyq_frame_at_config->qyq_frame_at_tick_bench = qyq_frame_at->qyq_frame_at_config->qyq_frame_at_tick_cnt - 1;
+    qyq_frame_at->qyq_frame_at_config->qyq_frame_at_tick_bench = qyq_frame_at->qyq_frame_at_config->qyq_frame_at_tick_cnt;
 
-    if (qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_index >= qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_size)
+    if (qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_index >= qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_size - 1)
     {
         qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_index = 0;
         qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_readready_status = 0;
@@ -213,6 +218,7 @@ static int8_t qyq_frame_at_run(struct qyq_frame_at_type *qyq_frame_at)
             {
                 if ((qyq_frame_at->qyq_frame_at_config->qyq_frame_at_tick_cnt - qyq_frame_at->qyq_frame_at_config->qyq_frame_at_tick_bench) > QYQ_FRAME_AT_RX_TIMEOUT)
                 {
+                    qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_buf[qyq_frame_at->qyq_frame_at_config->qyq_frame_at_rx_index] = '\0';
                     qyq_frame_at->qyq_frame_at_config->qyq_frame_at_states = QYQ_FRAME_AT_PARSE;
                 }
             }

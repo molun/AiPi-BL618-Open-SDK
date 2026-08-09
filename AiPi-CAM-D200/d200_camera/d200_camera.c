@@ -11,8 +11,8 @@ static uint8_t receive_status = 0; // 接收状态，用于判断是否接收完
 static uint8_t jpg_head_buf[800] = {0};
 static uint32_t jpg_head_len;
 static uint8_t camera_mode = 0;
-volatile uint8_t *pic_addr;
-volatile uint32_t pic_size = 0;
+uint8_t *pic_addr;
+uint32_t pic_size = 0;
 void *camera_muxsem_handle = NULL;
 
 #define DVP_JPEG_ROW_NUM (16)
@@ -24,9 +24,6 @@ uint8_t __attribute__((section(".psram_noinit"), aligned(32))) mjpeg_output_buff
 
 static void mjpeg_isr(int irq, void *arg)
 {
-    uint8_t *pic;
-    uint32_t jpeg_len;
-
     uint32_t intstatus = bflb_mjpeg_get_intstatus(mjpeg);
 
     bflb_cam_stop(cam0);
@@ -194,7 +191,7 @@ void d200_camera_init(void)
     cam_config.with_mjpeg = true;
     cam_config.input_source = CAM_INPUT_SOURCE_DVP;
     cam_config.output_format = CAM_OUTPUT_FORMAT_AUTO;
-    cam_config.output_bufaddr = dvp_buffer;
+    cam_config.output_bufaddr = (uint32_t)(uintptr_t)dvp_buffer;
     cam_config.output_bufsize = cam_config.resolution_x * 2 * DVP_JPEG_ROW_NUM;
 
     printf("dvp x: %d\r\n", cam_config.resolution_x);
@@ -269,7 +266,7 @@ void d200_camera_run(void)
 // 输出buff初始化
 void d200_camera_output_buff_init(void)
 {
-    pic_addr = (uint32_t)mjpeg_output_buffer;
+    pic_addr = mjpeg_output_buffer;
 }
 
 // 获取输出buff的地址

@@ -16,7 +16,9 @@
 #include "bflb_cam.h"
 #include "image_sensor.h"
 #include "bflb_mjpeg.h"
+#include "bflb_uart.h"
 #include "jpeg_head.h"
+#include "rfparam_adapter.h"
 
 //wifi 头文件
 #include <lwip/tcpip.h>

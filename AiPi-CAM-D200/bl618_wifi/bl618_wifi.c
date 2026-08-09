@@ -5,7 +5,6 @@
 typedef void (*bl618_wifi_callback_t)(void);
 
 static TaskHandle_t bl618_wifi_handle;
-static uint32_t bl618_wifi_sta_connect_status = 0;
 static wifi_conf_t conf = {
     .country_code = "CN",
 };
@@ -43,7 +42,7 @@ uint8_t bl618_wifi_connect(char *ssid, char *passwd)
     return 0;
 }
 
-uint8_t bl618_wifi_ap_start(uint8_t *ssid, uint8_t *pwd)
+uint8_t bl618_wifi_ap_start(char *ssid, char *pwd)
 {
     wifi_mgmr_ap_params_t config = {0};
 
@@ -78,7 +77,7 @@ void bl618_wifi_init(void)
     if (0 != rfparam_init(0, NULL, 0))
     {
         printf("PHY RF init failed!");
-        return 0;
+        return;
     }
 
     printf("PHY RF init success!");
