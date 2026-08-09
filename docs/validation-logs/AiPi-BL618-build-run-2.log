@@ -1,0 +1,566 @@
+E:/aipi-build-tools/cmake/bin/cmake.exe -E remove_directory build
+E:/aipi-build-tools/cmake/bin/cmake.exe -S . -B build -G "MinGW Makefiles" -DCROSS_COMPILE=riscv64-unknown-elf- -DCHIP=bl616 -DCPU_ID= -DBOARD=bl616dk -DBOARD_DIR= -DCONFIG_DEBUG=y -DCONFIG_ROMAPI=y -DCONFIG_USB_HS=y -DCONFIG_COMX=COM5 -DCMAKE_EXPORT_COMPILE_COMMANDS=OFF -DCONFIG_TLSF=y -DCONFIG_COREDUMP=y
+-- The C compiler identification is GNU 10.2.0
+-- The CXX compiler identification is GNU 10.2.0
+-- The ASM compiler identification is GNU
+-- Found assembler: E:/aipi-bl618-build/toolchain_gcc_t-head_windows/bin/riscv64-unknown-elf-gcc.exe
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: E:/aipi-bl618-build/toolchain_gcc_t-head_windows/bin/riscv64-unknown-elf-gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: E:/aipi-bl618-build/toolchain_gcc_t-head_windows/bin/riscv64-unknown-elf-g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Project SDK Version: 2.0.0
+LINK IN FLASH
+-- [register library : mbedtls], path:E:/aipi-bl618-build/bouffalo_sdk/components/crypto/mbedtls
+-- [register library : fatfs], path:E:/aipi-bl618-build/bouffalo_sdk/components/fs/fatfs
+-- [register library : libc], path:E:/aipi-bl618-build/bouffalo_sdk/components/libc
+-- [register library : mm], path:E:/aipi-bl618-build/bouffalo_sdk/components/mm
+-- [register library : lwip], path:E:/aipi-bl618-build/bouffalo_sdk/components/net/lwip/lwip
+-- [register library : dhcpd], path:E:/aipi-bl618-build/bouffalo_sdk/components/net/lwip/lwip_apps/dhcpd
+-- [register library : ping], path:E:/aipi-bl618-build/bouffalo_sdk/components/net/lwip/lwip_apps/ping
+-- [register library : freertos], path:E:/aipi-bl618-build/bouffalo_sdk/components/os/freertos
+-- [register library : shell], path:E:/aipi-bl618-build/bouffalo_sdk/components/shell
+-- [register library : utils], path:E:/aipi-bl618-build/bouffalo_sdk/components/utils
+-- [register extern library : libwifi6], path:E:/aipi-bl618-build/bouffalo_sdk/components/wireless/wifi6
+-- [register library : bl6_os_adapter], path:E:/aipi-bl618-build/bouffalo_sdk/components/wireless/wifi6/bl6_os_adapter
+-- [register library : lhal], path:E:/aipi-bl618-build/bouffalo_sdk/drivers/lhal
+-- [register extern library : libcsi_xt900p32f_dsp], path:E:/aipi-bl618-build/bouffalo_sdk/drivers/lhal
+-- [register extern library : libpka], path:E:/aipi-bl618-build/bouffalo_sdk/drivers/lhal
+-- [register library : std], path:E:/aipi-bl618-build/bouffalo_sdk/drivers/soc/bl616/std
+-- [register extern library : libbl616_phyrf], path:E:/aipi-bl618-build/bouffalo_sdk/drivers/soc/bl616/phyrf
+-- [register library : rfparam], path:E:/aipi-bl618-build/bouffalo_sdk/drivers/rfparam
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+System.Management.Automation.RemoteException
+    CONFIG_COMX
+    CONFIG_USB_HS
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+-- Build files have been written to: E:/aipi-bl618-build/AiPi-CAM-D200/build
+E:/aipi-bl618-build/bouffalo_sdk/tools/make/make -C build -j8
+make[1]: warning: -jN forced in submake: disabling jobserver mode.
+[  0%] Building C object CMakeFiles/app.dir/E_/aipi-bl618-build/bouffalo_sdk/bsp/sdk_version.c.obj
+[  1%] Building C object CMakeFiles/app.dir/E_/aipi-bl618-build/bouffalo_sdk/bsp/board/bl616dk/board.c.obj
+[  1%] Building ASM object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/startup/start.S.obj
+[  2%] Building C object build_out/components/fs/fatfs/CMakeFiles/fatfs.dir/diskio.c.obj
+[  2%] Building C object build_out/components/libc/CMakeFiles/libc.dir/newlib/port_memory.c.obj
+[  3%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/aes.c.obj
+[  3%] Building C object build_out/components/mm/CMakeFiles/mm.dir/mem.c.obj
+[  3%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/apps/lwiperf/lwiperf.c.obj
+In file included from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\diskio.c:10:
+E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+In file included from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\diskio.h:12,
+                 from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\diskio.c:11:
+E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[  3%] Building ASM object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/startup/vector.S.obj
+[  3%] Building C object build_out/components/fs/fatfs/CMakeFiles/fatfs.dir/ff.c.obj
+[  3%] Building C object CMakeFiles/app.dir/E_/aipi-bl618-build/bouffalo_sdk/bsp/board/bl616dk/fw_header.c.obj
+[  3%] Building C object build_out/components/libc/CMakeFiles/libc.dir/newlib/syscalls_nosys.c.obj
+[  3%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/aesni.c.obj
+[  4%] Building C object build_out/components/mm/CMakeFiles/mm.dir/tlsf/tlsf.c.obj
+In file included from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.c:22:
+E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+In file included from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\diskio.h:12,
+                 from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.c:23:
+E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[  4%] Building C object build_out/components/shell/CMakeFiles/shell.dir/shell.c.obj
+[  5%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/apps/http/fs.c.obj
+[  6%] Building ASM object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/startup/riscv_fpu.S.obj
+[  6%] Building C object CMakeFiles/app.dir/E_/aipi-bl618-build/bouffalo_sdk/bsp/board/bl616dk/board_rf.c.obj
+[  6%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/arc4.c.obj
+[  6%] Building C object build_out/components/fs/fatfs/CMakeFiles/fatfs.dir/ffsystem.c.obj
+[  6%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_abs.c.obj
+[  6%] Building C object build_out/components/mm/CMakeFiles/mm.dir/tlsf/bflb_tlsf.c.obj
+[  6%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/startup/start_load.c.obj
+[  6%] Building C object build_out/components/shell/CMakeFiles/shell.dir/shell_freertos.c.obj
+[  6%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/api/api_lib.c.obj
+In file included from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffsystem.c:5:
+E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[  7%] Building C object CMakeFiles/app.dir/E_/aipi-bl618-build/bouffalo_sdk/bsp/common/sdcard/sdh_sdcard.c.obj
+[  8%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/aria.c.obj
+[  8%] Building C object build_out/components/fs/fatfs/CMakeFiles/fatfs.dir/ffunicode.c.obj
+[  9%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_atof.c.obj
+[  9%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/startup/system_bl616.c.obj
+[  9%] Linking C static library ..\..\lib\libmm.a
+[ 10%] Linking C static library ..\..\lib\libshell.a
+[ 10%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/api/api_msg.c.obj
+[ 10%] Building C object CMakeFiles/app.dir/E_/aipi-bl618-build/bouffalo_sdk/bsp/common/image_sensor/image_sensor.c.obj
+In file included from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffunicode.c:26:
+E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[ 10%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/asn1parse.c.obj
+[ 10%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_atoi.c.obj
+[ 11%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/startup/interrupt.c.obj
+[ 12%] Building C object build_out/components/fs/fatfs/CMakeFiles/fatfs.dir/port/fatfs_sdh_sdcard.c.obj
+[ 12%] Built target mm
+[ 12%] Building C object CMakeFiles/app.dir/d200_camera/d200_camera.c.obj
+[ 12%] Built target shell
+[ 13%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/api/err.c.obj
+[ 13%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/asn1write.c.obj
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\port\fatfs_sdh_sdcard.c:26:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\diskio.h:12,
+                 from E:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\port\fatfs_sdh_sdcard.c:27:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[ 13%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_atol.c.obj
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from e:\aipi-bl618-build\aipi-cam-d200\chipconfig\chip_include.h:45,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\d200_camera\d200_camera.h:3,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\d200_camera\d200_camera.c:2:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[ 13%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_romapi_e907.c.obj
+[ 13%] Linking C static library ..\..\..\lib\libfatfs.a
+[ 13%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/api/netbuf.c.obj
+[ 14%] Building C object CMakeFiles/app.dir/d200_camera/jpeg_head.c.obj
+[ 15%] Building C object build_out/components/net/lwip/lwip_apps/ping/CMakeFiles/ping.dir/ping.c.obj
+[ 16%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_atoll.c.obj
+[ 17%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/base64.c.obj
+[ 17%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_romapi_patch.c.obj
+[ 17%] Building C object CMakeFiles/app.dir/bl618_wifi/bl618_wifi.c.obj
+[ 17%] Built target fatfs
+[ 17%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/api/netdb.c.obj
+E:\aipi-bl618-build\bouffalo_sdk\components\net\lwip\lwip_apps\ping\ping.c: In function 'ping':
+E:\aipi-bl618-build\bouffalo_sdk\components\net\lwip\lwip_apps\ping\ping.c:173:17: warning: 'ttl' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  173 |                 printf("%d bytes from %s icmp_seq=%d ttl=%d time=%d ms\n\r", recv_len, inet_ntoa(ina), send_times,
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  174 |                        ttl, elapsed_time);
+      |                        ~~~~~~~~~~~~~~~~~~
+E:\aipi-bl618-build\bouffalo_sdk\components\net\lwip\lwip_apps\ping\ping.c:130:12: note: 'ttl' was declared here
+  130 |     int s, ttl, recv_len;
+      |            ^~~
+[ 17%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_bsearch.c.obj
+[ 17%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/blowfish.c.obj
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from e:\aipi-bl618-build\aipi-cam-d200\chipconfig\chip_include.h:45,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\bl618_wifi\bl618_wifi.h:3,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\bl618_wifi\bl618_wifi.c:2:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[ 17%] Linking C static library ..\..\..\..\..\lib\libping.a
+[ 17%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_clock.c.obj
+[ 17%] Building C object CMakeFiles/app.dir/ap_web/mlwip_https.c.obj
+[ 17%] Building C object build_out/components/net/lwip/lwip_apps/dhcpd/CMakeFiles/dhcpd.dir/dhcp_server_raw.c.obj
+[ 18%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/api/netifapi.c.obj
+[ 18%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_checkbase.c.obj
+[ 18%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/camellia.c.obj
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from e:\aipi-bl618-build\aipi-cam-d200\chipconfig\chip_include.h:45,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\ap_web\mlwip_https.h:3,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\ap_web\mlwip_https.c:2:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[ 18%] Built target ping
+[ 19%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_common.c.obj
+[ 19%] Building C object CMakeFiles/app.dir/bl616_uart/bl616_uart.c.obj
+[ 19%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/api/sockets.c.obj
+[ 19%] Linking C static library ..\..\..\..\..\lib\libdhcpd.a
+[ 20%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_itoa.c.obj
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from e:\aipi-bl618-build\aipi-cam-d200\chipconfig\chip_include.h:45,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\bl616_uart\bl616_uart.h:3,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\bl616_uart\bl616_uart.c:2:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[ 20%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ccm.c.obj
+[ 20%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_ef_cfg.c.obj
+[ 20%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_llabs.c.obj
+[ 21%] Building C object CMakeFiles/app.dir/bl616_uart/qyq_frame_at.c.obj
+[ 21%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/croutine.c.obj
+[ 21%] Built target dhcpd
+[ 21%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/api/tcpip.c.obj
+[ 22%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/certs.c.obj
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from e:\aipi-bl618-build\aipi-cam-d200\chipconfig\chip_include.h:45,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\bl616_uart\qyq_frame_at.h:3,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\bl616_uart\qyq_frame_at.c:2:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[ 22%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_sdh.c.obj
+[ 22%] Building C object CMakeFiles/app.dir/filesystem/files.c.obj
+[ 22%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_lldiv.c.obj
+[ 23%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/event_groups.c.obj
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from e:\aipi-bl618-build\aipi-cam-d200\chipconfig\chip_include.h:45,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\filesystem\files.h:3,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\filesystem\files.c:2:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[ 23%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/chacha20.c.obj
+[ 23%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv4/autoip.c.obj
+[ 23%] Building C object build_out/components/utils/CMakeFiles/utils.dir/log/log.c.obj
+[ 24%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_tzc_sec.c.obj
+[ 24%] Building C object CMakeFiles/app.dir/button/qyq_module_button.c.obj
+[ 24%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/list.c.obj
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from e:\aipi-bl618-build\aipi-cam-d200\chipconfig\chip_include.h:45,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\button\qyq_module_button.h:3,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\button\qyq_module_button.c:2:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[ 25%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_qsort.c.obj
+[ 25%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/chachapoly.c.obj
+[ 26%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv4/dhcp.c.obj
+[ 28%] Building C object build_out/components/utils/CMakeFiles/utils.dir/ring_buffer/ring_buffer.c.obj
+[ 28%] Linking C static library build_out\lib\libapp.a
+[ 28%] Building C object build_out/components/wireless/wifi6/bl6_os_adapter/CMakeFiles/bl6_os_adapter.dir/src/rtos_al.c.obj
+[ 28%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_psram.c.obj
+[ 28%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/queue.c.obj
+[ 28%] Built target app
+[ 28%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/stdlib/lib_strtod.c.obj
+[ 29%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/cipher.c.obj
+[ 29%] Building C object build_out/components/utils/CMakeFiles/utils.dir/bflb_block_pool/bflb_block_pool.c.obj
+[ 29%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv4/etharp.c.obj
+[ 29%] Building C object build_out/components/wireless/wifi6/bl6_os_adapter/CMakeFiles/bl6_os_adapter.dir/src/platform_bouffalo_sdk.c.obj
+[ 29%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_pm.c.obj
+[ 30%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/tasks.c.obj
+[ 30%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_ffs.c.obj
+[ 30%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/cipher_wrap.c.obj
+[ 30%] Building C object build_out/components/utils/CMakeFiles/utils.dir/bflb_timestamp/bflb_timestamp.c.obj
+[ 31%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_mfg_efuse.c.obj
+[ 31%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_common.c.obj
+[ 32%] Linking C static library ..\..\..\..\lib\libbl6_os_adapter.a
+[ 32%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv4/icmp.c.obj
+[ 32%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/timers.c.obj
+[ 32%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/cmac.c.obj
+[ 33%] Building C object build_out/components/utils/CMakeFiles/utils.dir/getopt/utils_getopt.c.obj
+[ 33%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_ffsl.c.obj
+[ 33%] Built target bl6_os_adapter
+[ 33%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_adc.c.obj
+[ 34%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv4/igmp.c.obj
+[ 34%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_mfg_flash.c.obj
+[ 34%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/freertos_port.c.obj
+[ 34%] Building C object build_out/components/utils/CMakeFiles/utils.dir/coredump/bflb_coredump.c.obj
+[ 35%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/constant_time.c.obj
+[ 36%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_ffsll.c.obj
+[ 36%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv4/ip4_addr.c.obj
+[ 37%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_acomp.c.obj
+[ 37%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/portable/MemMang/heap_3.c.obj
+[ 37%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/src/bl616_mfg_media.c.obj
+[ 37%] Building C object build_out/drivers/rfparam/CMakeFiles/rfparam.dir/Src/rfparam_adapter.c.obj
+[ 37%] Building C object build_out/components/utils/CMakeFiles/utils.dir/cjson/cJSON.c.obj
+[ 37%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ctr_drbg.c.obj
+[ 37%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_fls.c.obj
+[ 37%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv4/ip4_frag.c.obj
+[ 37%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_cks.c.obj
+[ 38%] Building C object build_out/drivers/rfparam/CMakeFiles/rfparam.dir/Src/rfparam_rftlv.c.obj
+[ 39%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/portable/GCC/RISC-V/common/port.c.obj
+[ 40%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/port/bl616_gpio.c.obj
+[ 40%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/debug.c.obj
+[ 41%] Building C object build_out/components/utils/CMakeFiles/utils.dir/math/src/utils_base64.c.obj
+[ 41%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_flsl.c.obj
+[ 42%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv4/ip4.c.obj
+[ 42%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_ef_ctrl.c.obj
+[ 42%] Building C object build_out/drivers/soc/bl616/std/CMakeFiles/std.dir/port/bl616_clock.c.obj
+[ 42%] Building ASM object build_out/components/os/freertos/CMakeFiles/freertos.dir/portable/GCC/RISC-V/common/portASM.S.obj
+[ 42%] Linking C static library ..\..\lib\librfparam.a
+[ 43%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/des.c.obj
+[ 43%] Building C object build_out/components/utils/CMakeFiles/utils.dir/math/src/utils_crc.c.obj
+[ 44%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_flsll.c.obj
+[ 44%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_clock.c.obj
+[ 44%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv6/dhcp6.c.obj
+[ 44%] Built target rfparam
+[ 44%] Linking C static library ..\..\..\..\lib\libstd.a
+[ 45%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_gpio.c.obj
+[ 45%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/dhm.c.obj
+[ 45%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv6/ethip6.c.obj
+[ 45%] Building C object build_out/components/utils/CMakeFiles/utils.dir/math/src/utils_hex.c.obj
+[ 45%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_index.c.obj
+[ 45%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_i2c.c.obj
+[ 46%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_mqueue.c.obj
+[ 46%] Built target std
+[ 46%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ecdh.c.obj
+[ 47%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv6/icmp6.c.obj
+[ 47%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_memccpy.c.obj
+[ 48%] Linking C static library ..\..\lib\libutils.a
+[ 48%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_dma.c.obj
+[ 48%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv6/inet6.c.obj
+[ 48%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_pthread_barrier.c.obj
+[ 48%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ecdsa.c.obj
+[ 49%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_memchr.c.obj
+[ 49%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_rtc.c.obj
+[ 49%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv6/ip6.c.obj
+[ 49%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_pthread_cond.c.obj
+[ 49%] Built target utils
+[ 50%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ecjpake.c.obj
+[ 51%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_memcmp.c.obj
+[ 51%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_sec_aes.c.obj
+[ 51%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_sec_sha.c.obj
+[ 51%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv6/ip6_addr.c.obj
+[ 52%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_pthread_mutex.c.obj
+[ 52%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ecp.c.obj
+E:\aipi-bl618-build\bouffalo_sdk\components\os\freertos\posix\source\FreeRTOS_POSIX_pthread_cond.c: In function 'pthread_cond_timedwait':
+E:\aipi-bl618-build\bouffalo_sdk\components\os\freertos\posix\source\FreeRTOS_POSIX_pthread_cond.c:282:9: warning: 'iLocalWaitingThreads' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  282 |         prvTestAndDecrement( pxCond, iLocalWaitingThreads + 1 );
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+E:\aipi-bl618-build\bouffalo_sdk\components\os\freertos\posix\source\FreeRTOS_POSIX_pthread_cond.c:219:14: note: 'iLocalWaitingThreads' was declared here
+  219 |     unsigned iLocalWaitingThreads;
+      |              ^~~~~~~~~~~~~~~~~~~~
+[ 52%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_memmove.c.obj
+[ 53%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv6/ip6_frag.c.obj
+[ 53%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_sec_trng.c.obj
+[ 53%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ecp_curves.c.obj
+[ 53%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_pthread.c.obj
+[ 53%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_memrchr.c.obj
+[ 54%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv6/mld6.c.obj
+[ 54%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_spi.c.obj
+[ 55%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/entropy.c.obj
+[ 55%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_sched.c.obj
+[ 55%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_timer.c.obj
+[ 55%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ipv6/nd6.c.obj
+[ 56%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_memset.c.obj
+[ 56%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/entropy_poll.c.obj
+[ 57%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_semaphore.c.obj
+[ 57%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_stpcpy.c.obj
+[ 58%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/def.c.obj
+[ 58%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_uart.c.obj
+[ 58%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_stpncpy.c.obj
+[ 58%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/error.c.obj
+[ 58%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_timer.c.obj
+[ 58%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/dns.c.obj
+[ 59%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_wdg.c.obj
+[ 60%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/gcm.c.obj
+[ 60%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_unistd.c.obj
+[ 61%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strcasecmp.c.obj
+[ 61%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/inet_chksum.c.obj
+[ 61%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_flash.c.obj
+[ 61%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strcasestr.c.obj
+[ 61%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/havege.c.obj
+[ 61%] Building C object build_out/components/os/freertos/CMakeFiles/freertos.dir/posix/source/FreeRTOS_POSIX_utils.c.obj
+[ 62%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/init.c.obj
+[ 62%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strcat.c.obj
+[ 62%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/flash/bflb_sf_cfg.c.obj
+[ 62%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/hkdf.c.obj
+[ 62%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/ip.c.obj
+[ 63%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strchr.c.obj
+[ 64%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/flash/bflb_xip_sflash.c.obj
+[ 64%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/hmac_drbg.c.obj
+[ 65%] Linking C static library ..\..\..\lib\libfreertos.a
+[ 65%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/mem.c.obj
+[ 65%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/flash/bflb_sflash.c.obj
+[ 65%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strcmp.c.obj
+[ 65%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/memp.c.obj
+[ 66%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/md2.c.obj
+[ 66%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strcspn.c.obj
+[ 66%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/flash/bflb_sf_ctrl.c.obj
+[ 66%] Built target freertos
+[ 67%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/netif.c.obj
+[ 67%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/md4.c.obj
+[ 68%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strdup.c.obj
+[ 68%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/flash/bflb_flash_secreg_port.c.obj
+[ 68%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/md5.c.obj
+[ 68%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strnlen.c.obj
+[ 68%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/pbuf.c.obj
+[ 69%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/flash/bflb_flash_secreg.c.obj
+[ 69%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strpbrk.c.obj
+[ 69%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/raw.c.obj
+[ 70%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/md.c.obj
+[ 70%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_dac.c.obj
+[ 70%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strrchr.c.obj
+[ 71%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/stats.c.obj
+[ 71%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_emac.c.obj
+[ 71%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/memory_buffer_alloc.c.obj
+[ 71%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/sys.c.obj
+[ 72%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strsep.c.obj
+[ 73%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_ir.c.obj
+[ 73%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/mps_reader.c.obj
+[ 73%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/tcp_in.c.obj
+[ 73%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_mjpeg.c.obj
+[ 73%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strspn.c.obj
+[ 74%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/mps_trace.c.obj
+[ 75%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/tcp_out.c.obj
+[ 75%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_pwm_v2.c.obj
+[ 75%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strstr.c.obj
+[ 75%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/nist_kw.c.obj
+[ 76%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_cam.c.obj
+[ 76%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/oid.c.obj
+[ 76%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/tcp.c.obj
+[ 77%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strtok.c.obj
+[ 77%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_sdio2.c.obj
+[ 78%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/padlock.c.obj
+[ 78%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/timeouts.c.obj
+[ 78%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_strtokr.c.obj
+[ 78%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/pem.c.obj
+[ 78%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_i2s.c.obj
+[ 79%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/core/udp.c.obj
+[ 79%] Building C object build_out/components/libc/CMakeFiles/libc.dir/nuttx/libc/string/lib_vikmemcpy.c.obj
+[ 79%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/pk.c.obj
+[ 79%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/src/netif/ethernet.c.obj
+[ 80%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_dbi.c.obj
+[ 81%] Building C object build_out/components/libc/CMakeFiles/libc.dir/vsnprintf.c.obj
+[ 81%] Building C object build_out/components/net/lwip/lwip/CMakeFiles/lwip.dir/lwip-port/FreeRTOS/sys_arch.c.obj
+[ 81%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/pkparse.c.obj
+[ 81%] Building C object build_out/components/libc/CMakeFiles/libc.dir/snprintf.c.obj
+[ 81%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_audac.c.obj
+[ 81%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_auadc.c.obj
+[ 82%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/pkcs11.c.obj
+[ 82%] Building C object build_out/components/libc/CMakeFiles/libc.dir/sprintf.c.obj
+[ 82%] Linking C static library ..\..\..\..\lib\liblwip.a
+[ 82%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/pkcs12.c.obj
+[ 82%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_wo.c.obj
+[ 82%] Building C object build_out/components/libc/CMakeFiles/libc.dir/vsprintf.c.obj
+[ 83%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_irq.c.obj
+[ 83%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/pkcs5.c.obj
+[ 83%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_l1c.c.obj
+[ 83%] Built target lwip
+[ 84%] Building C object build_out/components/libc/CMakeFiles/libc.dir/printf.c.obj
+[ 85%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/pk_wrap.c.obj
+[ 85%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/src/bflb_mtimer.c.obj
+[ 85%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/pkwrite.c.obj
+[ 86%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/include/arch/risc-v/t-head/rv_hart.c.obj
+[ 86%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/include/arch/risc-v/t-head/rv_pmp.c.obj
+[ 86%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/platform.c.obj
+[ 86%] Linking C static library ..\..\lib\liblibc.a
+[ 87%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/platform_util.c.obj
+[ 87%] Building C object build_out/drivers/lhal/CMakeFiles/lhal.dir/config/bl616/device_table.c.obj
+[ 87%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/poly1305.c.obj
+[ 87%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ripemd160.c.obj
+[ 87%] Built target libc
+[ 88%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/rsa.c.obj
+[ 88%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/rsa_internal.c.obj
+[ 89%] Linking C static library ..\..\lib\liblhal.a
+[ 89%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/sha1.c.obj
+[ 89%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/sha256.c.obj
+[ 90%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/sha512.c.obj
+[ 90%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ssl_cache.c.obj
+[ 90%] Built target lhal
+[ 90%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ssl_ciphersuites.c.obj
+[ 91%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ssl_cli.c.obj
+[ 91%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ssl_cookie.c.obj
+[ 91%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ssl_msg.c.obj
+[ 92%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ssl_srv.c.obj
+[ 92%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ssl_ticket.c.obj
+[ 92%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ssl_tls13_keys.c.obj
+[ 92%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/ssl_tls.c.obj
+[ 93%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/threading.c.obj
+[ 93%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/timing.c.obj
+[ 93%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/version.c.obj
+[ 94%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/version_features.c.obj
+[ 94%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/x509.c.obj
+[ 94%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/x509_create.c.obj
+[ 95%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/x509_crl.c.obj
+[ 95%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/x509_crt.c.obj
+[ 95%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/x509_csr.c.obj
+[ 96%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/x509write_crt.c.obj
+[ 96%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/x509write_csr.c.obj
+[ 96%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/mbedtls/library/xtea.c.obj
+[ 96%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/net_sockets.c.obj
+[ 97%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/entropy_poll_alt.c.obj
+[ 97%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/hw_acc/aes_alt.c.obj
+[ 97%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/hw_acc/sha1_alt.c.obj
+[ 98%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/hw_acc/sha256_alt.c.obj
+[ 98%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/hw_acc/sha512_alt.c.obj
+[ 98%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/bignum.c.obj
+[ 99%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/hw_acc/bignum_alt.c.obj
+[ 99%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/hw_acc/ecp_alt.c.obj
+[ 99%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/hw_acc/ecp_curves_alt.c.obj
+[ 99%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/hw_acc/bignum_ext.c.obj
+[100%] Building C object build_out/components/crypto/mbedtls/CMakeFiles/mbedtls.dir/port/sec_mutex.c.obj
+[100%] Linking C static library ..\..\..\lib\libmbedtls.a
+[100%] Built target mbedtls
+[100%] Building C object CMakeFiles/AiPi-CAM-D200_bl616.elf.dir/main.c.obj
+In file included from e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ff.h:28,
+                 from e:\aipi-bl618-build\aipi-cam-d200\chipconfig\chip_include.h:45,
+                 from E:\aipi-bl618-build\AiPi-CAM-D200\main.c:2:
+e:\aipi-bl618-build\bouffalo_sdk\components\fs\fatfs\ffconf.h:15:2: warning: #warning "There is no user FatFs conf file and the default conf will be used" [-Wcpp]
+   15 | #warning "There is no user FatFs conf file and the default conf will be used"
+      |  ^~~~~~~
+[100%] Linking C executable build_out\AiPi-CAM-D200_bl616.elf
+Memory region         Used Size  Region Size  %age Used
+fw_header_memory:         256 B         4 KB      6.25%
+      xip_memory:      854064 B         4 MB     20.36%
+       ram_psram:       1050 KB         4 MB     25.63%
+     ram_nocache:        1248 B       319 KB      0.38%
+      ram_memory:         72 KB       319 KB     22.57%
+        ram_wifi:      144016 B       160 KB     87.90%
+Generate E:/aipi-bl618-build/AiPi-CAM-D200/build/build_out/AiPi-CAM-D200_bl616.bin
+[100%] Built target AiPi-CAM-D200_bl616.elf
+E:/aipi-bl618-build/bouffalo_sdk/tools/make/make -C build combine
+[15:54:34.421] - firmware post process : V1.2.7
+[15:54:34.421] - Chipname: bl616
+[15:54:34.422] - Board config dir: ./../bouffalo_sdk/bsp/board/bl616dk/config
+[15:54:34.422] - Create partition using partition_cfg_4M.toml
+[15:54:34.423] - Create dts for E:\aipi-bl618-build\AiPi-CAM-D200\build\build_out\AiPi-CAM-D200_bl616.bin
+[15:54:34.423] - Create dts using bl_factory_params_IoTKitA_auto.dts
+[15:54:34.426] - 4K header found,append dts file
+[15:54:34.426] - Copy boot2_bl616_isp_release_v8.1.2.bin
+[15:54:34.427] - Copy mfg_bl616_gu_34c572ca0_v2.49.bin
+[15:54:34.428] - Create dts for E:\aipi-bl618-build\AiPi-CAM-D200\build\build_out\mfg_bl616_gu_34c572ca0_v2.49.bin
+[15:54:34.428] - Create dts using bl_factory_params_IoTKitA_auto.dts
+[15:54:34.431] - 4K header found,append dts file
+[15:54:34.431] -
+
+Process E:\aipi-bl618-build\AiPi-CAM-D200\build\build_out\AiPi-CAM-D200_bl616.bin
+[15:54:34.432] - ========= sp image create =========
+[15:54:34.432] - Flash config crc: b'b5fec518'
+[15:54:34.432] - Clock config crc: b'4a05f490'
+[15:54:34.432] - Flash  Image
+[15:54:34.432] - Image Offset:0x1000
+[15:54:34.435] - Image hash is b'51867ee3d023871533ddf794f7217832da565dd5697b9e1092bb20249df55336'
+[15:54:34.436] - Encrypt efuse data
+[15:54:34.438] - Image Offset:0x1000
+[15:54:34.438] - Image hash ignore,not calculate
+[15:54:34.438] - Bootheader config crc: b'66af1e6c'
+[15:54:34.438] -
+
+Process E:\aipi-bl618-build\AiPi-CAM-D200\build\build_out\boot2_bl616_isp_release_v8.1.2.bin
+[15:54:34.439] - ========= sp image create =========
+[15:54:34.439] - Flash config crc: b'b5fec518'
+[15:54:34.439] - Clock config crc: b'4a05f490'
+[15:54:34.439] - Flash  Image
+[15:54:34.439] - Image Offset:0x2000
+[15:54:34.439] - Image hash is b'c912f0da62f395d9770048e53509e1ba37a89f9beb9c9dfa0ed06725821c4813'
+[15:54:34.439] - Encrypt efuse data
+[15:54:34.441] - Image Offset:0x2000
+[15:54:34.441] - Image hash ignore,not calculate
+[15:54:34.441] - Bootheader config crc: b'ca465ad7'
+[15:54:34.441] -
+
+Process E:\aipi-bl618-build\AiPi-CAM-D200\build\build_out\mfg_bl616_gu_34c572ca0_v2.49.bin
+[15:54:34.441] - ========= sp image create =========
+[15:54:34.441] - Flash config crc: b'f8de2a48'
+[15:54:34.441] - Clock config crc: b'0b34ef89'
+[15:54:34.441] - Flash  Image
+[15:54:34.441] - Image Offset:0x1000
+[15:54:34.443] - Image hash is b'70be2df9853611524252fcd0984e4a1d4ddef5366a1e5bacaddefc02ea5268f1'
+[15:54:34.443] - Encrypt efuse data
+[15:54:34.443] - Image Offset:0x1000
+[15:54:34.444] - Bootheader config crc: b'0ab20124'
+[15:54:34.444] - create OTA file:E:\aipi-bl618-build\AiPi-CAM-D200\build\build_out\AiPi-CAM-D200_bl616.bin.ota
+[15:54:34.491] - create XZ file:E:\aipi-bl618-build\AiPi-CAM-D200\build\build_out\AiPi-CAM-D200_bl616.xz
+[15:54:34.690] - create XZ OTA file:E:\aipi-bl618-build\AiPi-CAM-D200\build\build_out\AiPi-CAM-D200_bl616.xz.ota
+Built target combine

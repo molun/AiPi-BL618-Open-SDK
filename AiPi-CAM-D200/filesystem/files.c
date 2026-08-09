@@ -40,6 +40,9 @@ int filesystem_init(void)
             printf("first start to unmount.\r\n");
             ret = f_mount(NULL, "/sd", 1);
             printf("then start to remount.\r\n");
+            if (ret == FR_OK) {
+                ret = f_mount(&fs, "/sd", 1);
+            }
         }
     } else if (ret != FR_OK) {
         printf("fail to mount filesystem,error= %d\r\n", ret);
@@ -64,15 +67,16 @@ int take_photo(uint8_t *Buf, uint32_t len)
     FIL fnew;
     UINT fnum;
     // uint32_t time_node;
-    static creat_file_cnt = 0;
+    static uint32_t create_file_count = 0;
 #define PHOTO_NAME_LEN 30
-    uint8_t file_name[PHOTO_NAME_LEN] = { 0 };
+    char file_name[PHOTO_NAME_LEN] = { 0 };
     uint8_t *pData;
     uint32_t i = 0;
+    UINT write_size;
 
     memset(file_name, 0, PHOTO_NAME_LEN);
-    snprintf(file_name, PHOTO_NAME_LEN, "/sd/%d.jpg", creat_file_cnt);
-    creat_file_cnt++;
+    snprintf(file_name, PHOTO_NAME_LEN, "/sd/%lu.jpg", (unsigned long)create_file_count);
+    create_file_count++;
     ret = f_open(&fnew, file_name, FA_CREATE_ALWAYS | FA_WRITE);
     // ret = f_open(&fnew, "/sd/test_file.txt", FA_CREATE_ALWAYS | FA_WRITE);
     if (ret == FR_OK) {
@@ -81,15 +85,15 @@ int take_photo(uint8_t *Buf, uint32_t len)
         // ret = f_write(&fnew, Buf, len, &fnum);
         pData = Buf;
         while (i < len) {
-            if ((len - i) < 10 * 1024) {
-                ret = f_write(&fnew, pData, (len - i), &fnum);
-                i += (len - i);
-                // pData += (len-i);
-            } else {
-                ret = f_write(&fnew, pData, 10 * 1024, &fnum);
-                i += 10 * 1024;
-                pData += 10 * 1024;
+            write_size = (len - i) < (10 * 1024) ? (len - i) : (10 * 1024);
+            ret = f_write(&fnew, pData, write_size, &fnum);
+            if ((ret != FR_OK) || (fnum != write_size)) {
+                printf("Fail to write files(%d), requested:%u, written:%u\n", ret, write_size, fnum);
+                f_close(&fnew);
+                return (ret != FR_OK) ? ret : FR_DISK_ERR;
             }
+            i += fnum;
+            pData += fnum;
         }
 
         /* close file */
@@ -98,15 +102,17 @@ int take_photo(uint8_t *Buf, uint32_t len)
         // time_node = (uint32_t)bflb_mtimer_get_time_ms() - time_node;
 
         if (ret == FR_OK) {
-            printf("Write Succeed! photo cnt:%d\r\n", creat_file_cnt - 1);
-            printf("Write data size:%d Byte, written size:%d B\r\n", len, fnum);
+            printf("Write Succeed! photo cnt:%lu\r\n", (unsigned long)(create_file_count - 1));
+            printf("Write data size:%lu Byte\r\n", (unsigned long)len);
             // printf("Time:%dms, Write Speed:%d KB/s \r\n", time_node, ((sizeof(RW_Buffer) * i) >> 10) * 1000 / time_node);
         } else {
             printf("Fail to write files(%d)\n", ret);
-            return;
+            return ret;
         }
     } else {
         printf("Fail to open or create files: %d.\r\n", ret);
-        return;
+        return ret;
     }
+
+    return FR_OK;
 }
