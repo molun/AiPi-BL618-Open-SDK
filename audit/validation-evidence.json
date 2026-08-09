@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "repository": "Ai-Thinker-Open/AiPi-BL618-Open-SDK",
+  "reviewed_at": "2026-08-09T15:52:00+08:00",
+  "technical_review": {
+    "code_entry": {
+      "status": "verified",
+      "entry_points": [
+        "AiPi-CAM-D200/main.c:main"
+      ],
+      "evidence": [
+        "AiPi-CAM-D200/Makefile includes bouffalo_sdk/project.build",
+        "AiPi-CAM-D200/CMakeLists.txt calls sdk_set_main_file(main.c)",
+        "two clean builds linked AiPi-CAM-D200_bl616.elf"
+      ],
+      "build_linked": true
+    },
+    "architecture": {
+      "status": "verified",
+      "modules": [
+        "d200_camera",
+        "bl618_wifi",
+        "ap_web",
+        "bl616_uart",
+        "filesystem",
+        "button",
+        "bouffalo_sdk"
+      ],
+      "evidence": [
+        "AiPi-CAM-D200/CMakeLists.txt source groups",
+        "AiPi-CAM-D200/main.c initialization and task creation",
+        "docs/ARCHITECTURE.md"
+      ],
+      "init_flow": [
+        "board_init",
+        "bl618_wifi_init",
+        "filesystem_init",
+        "bl616_uart_init",
+        "create application tasks",
+        "vTaskStartScheduler"
+      ]
+    },
+    "build": {
+      "status": "passed",
+      "clean_builds": 2,
+      "command": "make CMAKE=E:/aipi-build-tools/cmake/bin/cmake.exe clean && make CMAKE=E:/aipi-build-tools/cmake/bin/cmake.exe -j4",
+      "commit": "ad57029a5b8bd625aa0da3e6460f271b5d85067b",
+      "log": "docs/validation-logs/AiPi-BL618-build-run-1.log; docs/validation-logs/AiPi-BL618-build-run-2.log",
+      "environment": {
+        "os": "Windows NT 10.0.26200.0",
+        "shell": "Windows PowerShell",
+        "cmake": "3.25.1",
+        "make": "4.2.1",
+        "compiler": "Xuantie-900 GCC 10.2.0, toolchain V2.6.1 B-20220906",
+        "target": "CHIP=bl616 BOARD=bl616dk"
+      },
+      "artifacts": [
+        {
+          "path": "AiPi-CAM-D200/build/build_out/AiPi-CAM-D200_bl616.elf",
+          "size": 6221444,
+          "sha256": "815ab08bca7af29b8493248727f57da82093ccc76882f75e521a282a59b7e8cf"
+        },
+        {
+          "path": "AiPi-CAM-D200/build/build_out/AiPi-CAM-D200_bl616.bin",
+          "size": 875264,
+          "sha256": "8363935d7f2f5f9a8683e4c7699bcb882307192069e7434326e297cd354f21d4"
+        },
+        {
+          "path": "AiPi-CAM-D200/build/build_out/AiPi-CAM-D200_bl616.map",
+          "size": 7366414,
+          "sha256": "d6f23e353a218b19a8b4b170c07a79d6f74d1d452f78946971ef164547c58f3d"
+        }
+      ],
+      "errors": 0,
+      "warnings": 20,
+      "application_warnings": 0,
+      "notes": [
+        "Both clean builds produced identical artifact sizes and identical MAP SHA-256.",
+        "ELF and BIN hashes differ because the BL616DK board source embeds __DATE__ and __TIME__.",
+        "No hardware validation was performed."
+      ]
+    }
+  }
+}
